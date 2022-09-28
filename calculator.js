@@ -10,11 +10,20 @@ app.get("/", (req, res) => {
 })
 
 app.post("/", (req, res) => {
-  console.log(req.body);
   var sum = Number(req.body.num1) + Number(req.body.num2);
   res.send("The sum is: " + "<h1><em>" + sum + "</em></h1>");
 })
 
+app.get("/bmicalculator", (req, res) => {
+  res.sendFile(__dirname + "/bmi.html");
+})
+
+app.post("/bmicalculator", (req, res) =>{
+  var weight = parseFloat(req.body.weight);
+  var height = parseFloat(req.body.height);
+  var bmi = weight / (height * height);
+  res.send("Your BMI is: " + bmi);
+} )
 app.listen(3000, () => {
   console.log("Server listening at port 3000");
 });
